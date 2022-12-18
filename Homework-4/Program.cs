@@ -18,11 +18,13 @@ namespace Homework_4
             // Извлек верхний элемент 'c' Size = 2
             Console.WriteLine($"Извлек верхний элемент '{stack.Pop()}' Size = {stack.Size}");
             stack.Add("d");
+
             // size = 3, Top = 'd'
             Console.WriteLine($"Добавил элемент d Size = {stack.Size}, Top = '{stack.Top}'");
             stack.Pop();
             stack.Pop();
             stack.Pop();
+
             // size = 0, Top = null
             Console.WriteLine($"Вызвал 3 раза метод Pop  Size = {stack.Size}, Top = {stack.Top}");
             stack.Pop();
