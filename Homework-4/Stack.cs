@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace Homework_4
 {
-    internal class Stack : StackExtensions
+    public class Stack 
     {
+        //Объект класса StackItem
+        StackItem stackItem;
+
         //Свойство Size
         public string Size 
         {
             get
             {
-               return Convert.ToString(SteckList.Count);
+               return Convert.ToString(stackItem.SteckList.Count);
             } 
         }
 
@@ -23,29 +26,29 @@ namespace Homework_4
             get
             {
                 //Если стек пустой вернём null
-                if (SteckList.Count == 0) return "null";
+                if (stackItem.SteckList.Count == 0) return null;
 
-                return SteckList.First();
+                return stackItem.SteckList.First();
             }
         }
 
         //Лист для хранения данных стека
-        internal List<string> SteckList = new List<string>();
+        //internal List<string> SteckList = new List<string>();
 
         public Stack(params string[] strArr) 
         {
+            stackItem = new StackItem();
+
             foreach (var str in strArr)
             {
-                //SteckList.Insert(0,str);
-                SteckList = SteckList.Prepend(str).ToList();
+                stackItem.SteckList.Insert(0, str);
             }
         }
 
         //Метод Add добавления данных в стек
         public void Add(string str)
         {
-            //SteckList.Insert(0, str);
-            SteckList = SteckList.Prepend(str).ToList();
+            stackItem.SteckList.Insert(0, str);
         }
         //Метод Pop получения верхнего элемента стека
         public string Pop()
@@ -54,12 +57,12 @@ namespace Homework_4
             try
             {
                 //Если стек пустой выбрасить исключение
-                if (SteckList.Count == 0)
+                if (stackItem.SteckList.Count == 0)
                 {
                     throw new Exception("Стек пустой!");
                 }
-                str = SteckList.First();
-                SteckList.RemoveAt(0);
+                str = stackItem.SteckList.First();
+                stackItem.SteckList.RemoveAt(0);
             }
             catch (Exception ex)
             {
@@ -69,19 +72,51 @@ namespace Homework_4
             return str;
         }
 
+
         public static Stack Concat(params Stack[] el)
         {
-            var newStack = new Stack(); 
+            var newStack = new Stack();
+
             foreach (var item in el)
             {
-                foreach (var elm in item.SteckList)
+                foreach (var elm in item.stackItem.SteckList)
                 {
-                    newStack.SteckList.Add(elm);
-                }
+                    newStack.stackItem.SteckList.Add(elm);
+                } 
             }
-            newStack.SteckList.Reverse();
-
+            
             return newStack;
+        }
+        //Преобразуем стек в масив
+        public string[] StackToArray(Stack el)
+        {
+            var rez = el.stackItem.SteckList.Where(x => x != "").ToArray();
+
+            return rez;
+        }
+
+        //Ссылка на предыдущий элеменит стека (Доп. задание 3)
+        public string SteckLinkElement()
+        {
+            return stackItem.SteckLinkSecondElement;
+        }
+
+        //-------------------------------------------------------------------------
+        // Доп. задание 3
+        class StackItem
+        {
+            private string _steckLinkSecondElement;
+            public string SteckLinkSecondElement
+            {
+                get
+                {
+                    return _steckLinkSecondElement = SteckList[1];
+                }
+             
+            }
+
+            public List<string> SteckList = new List<string>();
+            
         }
 
     }

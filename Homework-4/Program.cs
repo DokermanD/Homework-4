@@ -30,27 +30,32 @@ namespace Homework_4
             stack.Pop();
 
             //---------------------------------------------------------------------------------------------------------------
-            var s = new Stack("a", "b", "c");
-            s.Merge(s,new Stack("1", "2", "3"));
-            var rez = s.SteckList.Where(x => x != "").ToArray();
+            var st1 = new Stack("a", "b", "c");
+            var rez1 = StackExtensions.Merge(st1,new Stack("1", "2", "3"));
+            //var rez = s.SteckList.Where(x => x != "").ToArray();
             
             Console.WriteLine($"\nДоп. задание 1");
-            foreach (var item in rez)
-            {
-                Console.Write($"{item}, ");
-            }
-            Console.WriteLine();
-            //---------------------------------------------------------------------------------------------------------------
-            var st = Stack.Concat(new Stack("a", "b", "c"), new Stack("1", "2", "3"), new Stack("А", "Б", "В"));
-            var rez1 = st.SteckList.Where(x => x != "").ToArray();
-
-            Console.WriteLine($"\nДоп. задание 2");
             foreach (var item in rez1)
             {
                 Console.Write($"{item}, ");
             }
             Console.WriteLine();
             //---------------------------------------------------------------------------------------------------------------
+            var st2 = Stack.Concat(new Stack("a", "b", "c"), new Stack("1", "2", "3"), new Stack("А", "Б", "В"));
+            var rez2 = st2.StackToArray(st2);
+
+            Console.WriteLine($"\nДоп. задание 2");
+            foreach (var item in rez2)
+            {
+                Console.Write($"{item}, ");
+            }
+            Console.WriteLine();
+            //---------------------------------------------------------------------------------------------------------------
+            var st3 = new Stack("А0", "Б1", "В2", "Г3", "Д4");
+            Console.WriteLine($"\nДоп. задание 3");
+            var rez3 = st3.SteckLinkElement();
+            Console.WriteLine("ссылка на предыдущий элемент = " + rez3);
+
             Console.ReadKey();
         }
     }

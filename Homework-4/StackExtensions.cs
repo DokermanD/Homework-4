@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 
 namespace Homework_4
 {
-    internal class StackExtensions
+    public static class StackExtensions
     {
-        public void Merge(Stack s1, Stack s2)
+        public static List<string> Merge(Stack s1, Stack s2)
         {
-            //s2.SteckList.Reverse();
-            foreach (var item in s2.SteckList)
+            var arr1 = s1.StackToArray(s1).Reverse().ToList();
+            var arr2 = s2.StackToArray(s2);
+
+            foreach (var item in arr2)
             {
-                s1.Add(item);
+                arr1.Add(item);
             }
-            
+            return arr1;
         }
     }
 }
